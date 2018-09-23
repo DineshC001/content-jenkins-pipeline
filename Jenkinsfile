@@ -15,13 +15,8 @@ pipeline {
               }
         }
         stage('Deploy') {
-/*           when {
-*             expression {
-*               currentBuild.result == null || currentBuild.result == 'SUCCESS'
-*             }
-*/           }
            steps {
-                  sh 'make publish'
+              echo 'Deploying....'
            }
         }
         stage('run') {
@@ -56,9 +51,5 @@ node {
     }
     stage('Deploy') {
       echo 'Deploying....'
-
-/*      if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
-*         sh 'make publish'
-*/      }
     } 
 }
