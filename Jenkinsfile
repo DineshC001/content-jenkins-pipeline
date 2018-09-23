@@ -21,6 +21,9 @@ pipeline {
         }
         stage('run') {
            steps {
+              /* `make check` returns non-zero on test failures,
+              * using `true` to allow the Pipeline to continue nonetheless
+              */
               sh 'java -jar rectangle.jar 7 9' 
            }
         }
@@ -41,6 +44,10 @@ node {
     }
     stage('Test') {
       echo 'Building....'
+      /* `make check` returns non-zero on test failures,
+      * using `true` to allow the Pipeline to continue nonetheless 
+      */
+      sh 'java -jar rectangle.jar 7 9'
     }
     stage('Deploy') {
       echo 'Deploying....'
