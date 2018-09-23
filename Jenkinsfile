@@ -15,11 +15,13 @@ pipeline {
               }
         }
         stage('Deploy') {
+           when {
+             expression {
+               currentBuild.result == null || currentBuild.result == 'SUCCESS'
+             }
+           }
            steps {
-              echo 'Deploying....'
-              if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
-                 sh 'make publish'
-              }
+                  sh 'make publish'
            }
         }
         stage('run') {
