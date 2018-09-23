@@ -17,6 +17,9 @@ pipeline {
         stage('Deploy') {
            steps {
               echo 'Deploying....'
+              if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
+                 sh 'make publish'
+              }
            }
         }
         stage('run') {
@@ -51,5 +54,8 @@ node {
     }
     stage('Deploy') {
       echo 'Deploying....'
+      if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
+         sh 'make publish'
+      }
     } 
 }
