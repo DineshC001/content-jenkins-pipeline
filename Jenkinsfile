@@ -3,10 +3,21 @@ pipeline {
     stages { 
         stage('build') {
             steps {
+                echo 'Building..'
                 sh 'javac -d . src/*.java'
                 sh 'echo Main-Class: Rectangulator > MANIFEST.MF' 
                 sh 'jar -cvmf MANIFEST.MF rectangle.jar *.class'
             }
+        }
+        stage('Test') {
+              steps {
+                  echo 'Testing..'
+              }
+        }
+        stage('Deploy') {
+           steps {
+              echo 'Deploying....'
+           }
         }
         stage('run') {
            steps {
@@ -18,4 +29,16 @@ pipeline {
             }
         }
     }
+}
+    // Script //
+node {
+    stage('Build') {
+      echo 'Building....'
+    }
+    stage('Test') {
+      echo 'Building....'
+    }
+    stage('Deploy') {
+      echo 'Deploying....'
+    } 
 }
